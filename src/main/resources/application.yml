@@ -1,0 +1,23 @@
+spring:
+  rabbitmq:
+    password: guest
+    username: guest
+    port: 5672
+    addresses: 127.0.0.1
+    #开启发送失败返回
+    publisher-returns: true
+    #结合上面的publisherReturns可以支持已确认（具有相关性）和返回的消息
+    publisher-confirm-type: correlated
+    listener:
+      simple:
+        #最小消费者数量
+        concurrency: 2
+        #最大消费者数量
+        max-concurrency: 2
+        #设置ack方式为自动提交
+        acknowledge-mode: auto
+      direct:
+        acknowledge-mode: auto
+    template:
+      #支持消息的确认和返回
+      mandatory: true

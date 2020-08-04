@@ -4,20 +4,20 @@ spring:
     username: guest
     port: 5672
     addresses: 127.0.0.1
-    #¿ªÆô·¢ËÍÊ§°Ü·µ»Ø
+    #å¼€å¯å‘é€å¤±è´¥è¿”å›
     publisher-returns: true
-    #½áºÏÉÏÃæµÄpublisherReturns¿ÉÒÔÖ§³ÖÒÑÈ·ÈÏ£¨¾ßÓĞÏà¹ØĞÔ£©ºÍ·µ»ØµÄÏûÏ¢
+    #ç»“åˆä¸Šé¢çš„publisherReturnså¯ä»¥æ”¯æŒå·²ç¡®è®¤ï¼ˆå…·æœ‰ç›¸å…³æ€§ï¼‰å’Œè¿”å›çš„æ¶ˆæ¯
     publisher-confirm-type: correlated
     listener:
       simple:
-        #×îĞ¡Ïû·ÑÕßÊıÁ¿
+        #æœ€å°æ¶ˆè´¹è€…æ•°é‡
         concurrency: 2
-        #×î´óÏû·ÑÕßÊıÁ¿
+        #æœ€å¤§æ¶ˆè´¹è€…æ•°é‡
         max-concurrency: 2
-        #ÉèÖÃack·½Ê½Îª×Ô¶¯Ìá½»
+        #è®¾ç½®ackæ–¹å¼ä¸ºè‡ªåŠ¨æäº¤
         acknowledge-mode: auto
       direct:
         acknowledge-mode: auto
     template:
-      #Ö§³ÖÏûÏ¢µÄÈ·ÈÏºÍ·µ»Ø
+      #æ”¯æŒæ¶ˆæ¯çš„ç¡®è®¤å’Œè¿”å›
       mandatory: true

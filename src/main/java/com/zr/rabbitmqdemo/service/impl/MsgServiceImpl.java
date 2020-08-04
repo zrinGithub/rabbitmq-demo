@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 /**
  * Description:
  *
- * @author zhangr
+ * @author zhangrRabbitListener
  * 2020/7/23 16:34
  */
 @Service
@@ -19,7 +19,6 @@ public class MsgServiceImpl implements MsgService {
 
     @Override
     public String test(String msg) {
-//        rabbitTemplate.convertAndSend("topic_exchange","keyA.A","Test");
         Object receive = rabbitTemplate.convertSendAndReceive("topic_exchange", "keyA.A", msg);
         return receive == null ? "hello word!" : receive.toString();
     }

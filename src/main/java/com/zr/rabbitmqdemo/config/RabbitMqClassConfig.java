@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author zhangr
  * 2020/7/23 16:09
  */
-@Configuration
+//@Configuration
 public class RabbitMqClassConfig {
     private final static String TOPIC_QUEUE_NAME = "topic_queue";
     private final static String FANOUT_QUEUE_NAME = "fanout_queue";

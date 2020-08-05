@@ -1,3 +1,4 @@
+
 spring:
   rabbitmq:
     password: guest
@@ -21,3 +22,5 @@ spring:
     template:
       #支持消息的确认和返回
       mandatory: true
+server:
+  port: 8081

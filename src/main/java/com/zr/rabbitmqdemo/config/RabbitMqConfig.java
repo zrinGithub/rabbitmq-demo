@@ -86,11 +86,16 @@ public class RabbitMqConfig {
         this.connectionFactory.setPublisherConfirms(true);
         this.connectionFactory.setPublisherReturns(true);
         RabbitTemplate rabbitTemplate = new RabbitTemplate(this.connectionFactory);
-        rabbitTemplate.setMandatory(true);
+        //消息路径 producer->rabbitmq broker cluster->exchange->queue->consumer
+        //confirm只能保证消息到达broker或者cluster，
+        //确认回调函数
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) ->
-                log.info("{}),ack({}),cause({})", new Object[]{correlationData, Boolean.valueOf(ack), cause}));
+                log.info("消息投递成功：({}),ack({}),cause({})", new Object[]{correlationData, Boolean.valueOf(ack), cause}));
+        //开启强制委托模式
+        rabbitTemplate.setMandatory(true);
+        //未投递到queue退回
         rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) ->
-                log.info("{}),route({}),replyCode({}),replyText({}),message:{}", new Object[]{exchange, routingKey, Integer.valueOf(replyCode), replyText, message}));
+                log.info("消息投递失败：({}),route({}),replyCode({}),replyText({}),message:{}", new Object[]{exchange, routingKey, Integer.valueOf(replyCode), replyText, message}));
         return rabbitTemplate;
     }
 

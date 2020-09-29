@@ -19,8 +19,10 @@ spring:
         acknowledge-mode: auto
       direct:
         acknowledge-mode: auto
+        default-requeue-rejected: false
     template:
       #支持消息的确认和返回
       mandatory: true
+    virtual-host: /
 server:
   port: 8081

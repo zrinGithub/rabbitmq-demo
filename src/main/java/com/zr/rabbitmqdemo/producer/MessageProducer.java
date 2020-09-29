@@ -24,7 +24,7 @@ public class MessageProducer {
      * 发送取消订单消息
      */
     public void sendCancelOrderInfo(String orderId) {
-        rabbitTemplate.convertAndSend(ORDER_EXCHANGE, CANCEL_ORDER_ROUTING_KEY, orderId);
+        rabbitTemplate.convertAndSend(ORDER_EXCHANGE, "cancel", orderId);
     }
 
     /**

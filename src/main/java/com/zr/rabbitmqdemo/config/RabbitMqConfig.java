@@ -1,5 +1,6 @@
 package com.zr.rabbitmqdemo.config;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -90,12 +91,12 @@ public class RabbitMqConfig {
         //confirm只能保证消息到达broker或者cluster，
         //确认回调函数
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) ->
-                log.info("消息投递成功：({}),ack({}),cause({})", new Object[]{correlationData, Boolean.valueOf(ack), cause}));
+                log.info("消息投递到exchange成功：({}),ack({}),cause({})", new Object[]{JSONObject.toJSONString(correlationData), Boolean.valueOf(ack), cause}));
         //开启强制委托模式
         rabbitTemplate.setMandatory(true);
         //未投递到queue退回
         rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) ->
-                log.info("消息投递失败：({}),route({}),replyCode({}),replyText({}),message:{}", new Object[]{exchange, routingKey, Integer.valueOf(replyCode), replyText, message}));
+                log.info("消息投递到queue失败：({}),route({}),replyCode({}),replyText({}),message:{}", new Object[]{exchange, routingKey, Integer.valueOf(replyCode), replyText, message}));
         return rabbitTemplate;
     }
 
